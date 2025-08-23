@@ -12,7 +12,6 @@ from torch.autograd import Variable
 
 from transformers.activations import gelu
 from utils import build_embedding_of_corpus
-# from fusion.utils import build_embedding_of_corpus
 
 class Embedding(torch.nn.Module):
     def __init__(self, vocab, embed_dim):

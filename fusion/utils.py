@@ -44,61 +44,6 @@ def read_samples(file_name):
     return samples
 
 
-def build_graph(real_sent_num, rel_sent_ids, s2s_edge_id):
-    """
-        Note: self-connection is very important
-        Args:
-            rel_sent_ids: relations between sentences, including entity relation
-            s2s_edge_id: edge id between adjacent sentence
-    """
-    start_indices = []
-    end_indices = []
-    values = []
-
-    # 1. edge between adjacent sentences
-    # """
-    for idx in range(real_sent_num - 1):
-        start_indices.append(idx)
-        end_indices.append(idx + 1)
-        values.append(s2s_edge_id)
-
-        start_indices.append(idx + 1)
-        end_indices.append(idx)
-        values.append(s2s_edge_id)
-    # """
-
-    # 2. relations between sentences
-    # """
-    for item in rel_sent_ids:
-        if item[1] >= real_sent_num or item[2] >= real_sent_num:
-            continue
-
-        start_indices.append(item[1])
-        end_indices.append(item[2])
-        values.append(item[0])
-
-        start_indices.append(item[2])
-        end_indices.append(item[1])
-        values.append(item[0])
-    # """
-
-    # 3. self-connected edge
-    # """
-    for idx in range(s2s_edge_id+1):
-        for idy in range(real_sent_num):
-            start_indices.append(idy)
-            end_indices.append(idy)
-            values.append(idx)
-    # """
-
-    start_indices = np.array(start_indices)
-    end_indices = np.array(end_indices)
-    indices = np.array([start_indices, end_indices])
-    values = np.array(values)
-
-    return torch.tensor(indices), torch.tensor(values)
-
-
 def mask_position_for_fusion(
     max_sent_num, real_sent_num,
     max_rel_num, rel_sent_ids
@@ -165,6 +110,7 @@ def mask_position_for_fusion(
 
     return expand_sent_mask, sent_rel_mask, rel_ids, (merged_start_pos, merged_end_pos)
 
+
 def labels_from_file(label_file):
     label_list = []
     with open(label_file, "r", encoding="utf-8") as f:
@@ -175,6 +121,7 @@ def labels_from_file(label_file):
                 label_list.append(line.strip().lower())
 
     return label_list
+
 
 def build_embedding_of_corpus(embed_file, vocab, embed_dim, saved_file):
     if os.path.exists(saved_file):

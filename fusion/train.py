@@ -30,10 +30,6 @@ from task_dataset import SentDataset
 from model import BaseClassifer, FusionClassifier
 from utils import labels_from_file  # , extract_relation_embedding
 
-# from fusion.task_dataset import SentDataset
-# from fusion.model import BaseClassifer, FusionClassifier
-# from fusion.utils import labels_from_file
-
 # logging.disable(logging.WARNING)
 
 # set logger, print to console and write to file

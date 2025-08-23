@@ -11,7 +11,7 @@ from torch.utils.data import Dataset
 import random
 from tqdm import tqdm, trange
 
-from utils import build_graph, mask_position_for_fusion
+from utils import mask_position_for_fusion
 
 random.seed(106524)
 

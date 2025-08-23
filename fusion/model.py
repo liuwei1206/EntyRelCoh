@@ -16,9 +16,6 @@ from transformers.activations import gelu
 from module import Embedding, Absolute_Position_Embedding, FusionTransformer
 from module import Doc_Pooler, Relative_Position_Embedding
 
-# from fusion.module import Embedding, Absolute_Position_Embedding, FusionTransformer
-# from fusion.module import Doc_Pooler, Relative_Position_Embedding
-
 class BaseClassifer(nn.Module):
     def __init__(self, args):
         super(BaseClassifer, self).__init__()
