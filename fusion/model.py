@@ -12,7 +12,6 @@ import torch.nn.functional as F
 from torch import nn
 from torch.nn import CrossEntropyLoss
 from transformers.activations import gelu
-from torch_geometric.nn import RGCNConv, RGATConv
 
 from module import Embedding, Absolute_Position_Embedding, FusionTransformer
 from module import Doc_Pooler, Relative_Position_Embedding
